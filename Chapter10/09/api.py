@@ -12,7 +12,8 @@ class JobListing(Resource):
     def get(self, job_listing_id):
         print("Request for job listing with id: " + job_listing_id)
 
-        es = Elasticsearch(hosts=["elastic"])
+        # es = Elasticsearch(hosts=["elastic"])
+        es = Elasticsearch("https://localhost:9200")
         if (es.exists(index='joblistings', doc_type='job-listing', id=job_listing_id)):
             print('Found the document in ElasticSearch')
             doc =  es.get(index='joblistings', doc_type='job-listing', id=job_listing_id)

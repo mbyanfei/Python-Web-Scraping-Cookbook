@@ -3,6 +3,6 @@ WORKDIR /usr/src/app
 
 RUN pip install Flask-RESTful Elasticsearch Nameko
 
-COPY 10/09/api.py .
+COPY Chapter10/09/api.py .
 
 CMD ["python", "api.py"]

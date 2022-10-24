@@ -9,23 +9,35 @@ import requests
 def get_job_listing_info(job_listing_id):
     print("Got a request for a job listing with id: " + job_listing_id)
 
-    req = requests.get("https://stackoverflow.com/jobs/" + job_listing_id)
-    content = req.text
+    # req = requests.get("https://stackoverflow.com/jobs/" + job_listing_id)
+    # content = req.text
 
-    bs = BeautifulSoup(content, "lxml")
-    script_tag = bs.find("script", {"type": "application/ld+json"})
+    # bs = BeautifulSoup(content, "lxml")
+    # script_tag = bs.find("script", {"type": "application/ld+json"})
 
-    job_listing_contents = json.loads(script_tag.contents[0])
-    desc_bs = BeautifulSoup(job_listing_contents["description"], "lxml")
-    just_text = desc_bs.find_all(text=True)
+    # job_listing_contents = json.loads(script_tag.contents[0])
+    # desc_bs = BeautifulSoup(job_listing_contents["description"], "lxml")
+    # just_text = desc_bs.find_all(text=True)
 
-    joined = ' '.join(just_text)
-    tokens = word_tokenize(joined)
+    # joined = ' '.join(just_text)
+    # tokens = word_tokenize(joined)
 
-    stop_list = stopwords.words('english')
-    with_no_stops = [word for word in tokens if word.lower() not in stop_list]
-    two_grammed = tech_2grams(with_no_stops)
-    cleaned = remove_punctuation(two_grammed)
+    # stop_list = stopwords.words('english')
+    # with_no_stops = [word for word in tokens if word.lower() not in stop_list]
+    # two_grammed = tech_2grams(with_no_stops)
+    # cleaned = remove_punctuation(two_grammed)
+
+#     {"ID": "122517", "JSON": {"@context": "http://schema.org", "@type":
+# "JobPosting", "title": "SpaceX Enterprise Software Engineer, Full
+# Stack", "skills": ["c#", "sql", "javascript", "asp.net",
+# "angularjs"],
+    job_listing_id = 122517
+    job_listing_contents = '''{"@context": "http://schema.org", "@type":
+# "JobPosting", "title": "SpaceX Enterprise Software Engineer, Full
+# Stack", "skills": ["c#", "sql", "javascript", "asp.net",
+# "angularjs"]}'''
+    just_text = "We are seeking developers with demonstrable experience in: ASP.NET,C#, SQL Server, and AngularJS"
+    cleaned =  ['We', 'seeking', 'developers', 'demonstrable', 'experience','ASP', 'NET', 'C', 'SQL', 'Server', 'AngularJS']
 
     result = {
         "ID": job_listing_id,
